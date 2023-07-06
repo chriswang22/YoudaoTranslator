@@ -1,5 +1,4 @@
-
-# YoudaoTranslate | 有道翻译  
+# YoudaoTranslate | 有道翻译
 
 <p align="left">
 <img alt="GitHub stars" src="https://visitor-badge.laobi.icu/badge?page_id=wensonsmith.YoudaoTranslate"/>
@@ -9,6 +8,7 @@
 ![screenshot_1](screenshots/screenshot_1.png)
 
 ## ⚠️ V3 更新说明
+
 该版本使用 TS 重构，自带运行环境，不再依赖 PHP。同时支持多个平台的 API。
 
 macOS Monterey 请使用 V3 版本！
@@ -16,6 +16,7 @@ macOS Monterey 请使用 V3 版本！
 标记为施工中 (🚧) 特性 V3 尚未支持，如果需要使用，请切换到 V2 使用。
 
 ## 特性
+
 - 🌟 [**无系统环境依赖**]() - 自带 [txiki](https://github.com/saghul/txiki.js) 运行环境，不再需要 PHP
 - 🌟 [**多平台支持**]() - 支持百度的翻译API
 - 🌐 [**中英文自动互翻**]() - 支持 `CamelCase` 驼峰短语翻译，长句自动换行
@@ -40,13 +41,23 @@ macOS Monterey 请使用 V3 版本！
 ### 2. 配置Workflow
 
 [👉 请参考 wiki 进行配置](https://github.com/wensonsmith/YoudaoTranslator/wiki)
+
+### 3. 代码运行说明
+
+```
+nvm use v16.11.1
+npm install --force
+npm run buildtest  'hello'
+```
+
 ## Contributors
 
 <a href="https://iwenson.com" target="_blank"><img src="https://avatars1.githubusercontent.com/u/2544185?s=120&v=4" height="60"/></a> 
 <a href="https://blog.zthxxx.me" target="_blank"><img src="https://avatars0.githubusercontent.com/u/15135943?s=120&v=4" height="60"/></a> 
-<a href="https://www.zzaning.com/#/" target="_blank"><img src="https://avatars2.githubusercontent.com/u/12035097?s=88&u=7e419cd2eb7b9fec5ba061d8135c4875a4c32323&v=4" height="60"/></a> 
+<a href="https://www.zzaning.com/#/" target="_blank"><img src="https://avatars2.githubusercontent.com/u/12035097?s=88&u=7e419cd2eb7b9fec5ba061d8135c4875a4c32323&v=4" height="60"/></a>
 
 ## ~~Buy me a coffee~~ 🍼 冲奶粉!
+
 ![微信支付](./screenshots/sponsor.PNG)
 
 ## 使用库和参考资料

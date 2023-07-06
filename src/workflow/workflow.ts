@@ -9,14 +9,15 @@ class Workflow {
     this.results = results.map(r => {
       const icon = r.arg.startsWith("~") ? 'assets/translate-say.png' : 'assets/translate.png'
       return new Item().setTitle(r.title)
-      .setSubtitle(r.subtitle)
-      .setArg(r.arg)
-      .setIcon(icon)
-      .setCmd('🔊 ' + r.pronounce, r.pronounce)
-      .setAlt('📣 ' + r.pronounce, r.pronounce)
-      .setCopy(r.title)
-      .setQuicklookurl(r.quicklookurl)
-      .result();
+        .setSubtitle(r.subtitle)
+        .setArg(r.arg)
+        .setIcon(icon)
+        .setCmd('🔊 ' + r.pronounce, r.pronounce)
+        .setAlt('📣 ' + r.pronounce, r.pronounce)
+        .setCtrl('⭐ ' + r.pronounce, r.pronounce)
+        .setCopy(r.title)
+        .setQuicklookurl(r.quicklookurl)
+        .result();
     });
 
     return this;

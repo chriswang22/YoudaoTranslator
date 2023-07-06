@@ -8,7 +8,7 @@ interface ITranslator {
   translate: (word: string) => Promise<any>;
 }
 
-class Translator implements ITranslator{
+class Translator implements ITranslator {
 
   adapter: Adapter;
 
@@ -17,16 +17,21 @@ class Translator implements ITranslator{
   }
 
   public async translate(query: string): Promise<any> {
+    const response = await this.translateRaw(query)
+    // parse
+    const result = this.adapter.parse(response.data);
+    // compose
+    return new Workflow().compose(result).output();
+  }
+
+  public async translateRaw(query: string): Promise<any> {
     // camel case to space case
     const word = query.replace(/([A-Z])/g, ' $1').toLowerCase();
     // url
     const url = this.adapter.url(word);
     // fetch
     const response = await redaxios.create().get(url);
-    // parse
-    const result = this.adapter.parse(response.data);
-    // compose
-    return new Workflow().compose(result).output();
+    return response
   }
 }
 
