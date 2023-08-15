@@ -8,8 +8,10 @@ const main = async () => {
   //replace your key and secret
   const key = getenvOrDefault('key', '***')
   const secret = getenvOrDefault('secret', '***')
-  const platform = getenvOrDefault('platform', '***')
-  const configs = { key, secret, platform }
+  const platform = getenvOrDefault('platform', 'Youdao')
+  const modelName = getenvOrDefault('modelName', 'note')
+  const deckName = getenvOrDefault('deckName', 'note')
+  const configs = { key, secret, platform, modelName, deckName }
   const result = await command(type, configs).execute(word)
   console.log(result);
 }

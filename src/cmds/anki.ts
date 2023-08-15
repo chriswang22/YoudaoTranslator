@@ -3,7 +3,7 @@ import redaxios from '../libs/redaxios'
 import Translator from "../translator";
 import md5 from "../libs/md5";
 export default class Anki implements Icmd {
-    configs: { key: string, secret: string, platform: string };
+    configs: { key: string, secret: string, platform: string, modelName: string, deckName: string };
     constructor(configs: any) {
         this.configs = configs;
     }
@@ -21,9 +21,8 @@ export default class Anki implements Icmd {
         const webTransList = this.parseWeb(web)
         const explain = this.parseBasic(basic);
         const phonetic = this.parsePhonetic(basic)
-        const res = addNotes(query, translationStr, explain, webTransList, phonetic)
-        console.log(res)
-        return 'success'
+        const res = await this.addNotes(query, translationStr, explain, webTransList, phonetic)
+        return `result:${res}`
     }
     private parseTranslation(translation) {
         if (translation) {
@@ -77,42 +76,39 @@ export default class Anki implements Icmd {
         }
         return phonetic;
     }
-
+    async addNotes(word, translationStr, explain, webTransList, phonetic) {
+        const hash = md5(`youdao_${word}.mp3`);
+        return await invokeAnki({
+            "action": "addNotes",
+            "version": 6,
+            "params": {
+                "notes": [
+                    {
+                        "deckName": this.configs.deckName,
+                        "modelName": this.configs.modelName,
+                        "fields": {
+                            "English": word,
+                            "Chinese": translationStr,
+                            "explain": explain,
+                            "webTranslate": webTransList,
+                            "phonetic": phonetic,
+                            "Audio": `[sound:youdao_${word}.mp3]`
+                        },
+                        "audio": [{
+                            "url": `https://dict.youdao.com/dictvoice?type=1&audio=${word}`,
+                            "filename": `youdao_${word}.mp3`,
+                            "skipHash": hash,
+                            "fields": [
+                                "Front", "Back"
+                            ]
+                        }],
+                    }
+                ]
+            }
+        });
+    }
 }
 
-
-
-async function addNotes(word, translationStr, explain, webTransList, phonetic) {
-    const hash = md5(`youdao_${word}.mp3`);
-    return await invokeAnki({
-        "action": "addNotes",
-        "version": 6,
-        "params": {
-            "notes": [
-                {
-                    "deckName": "note",
-                    "modelName": "note",
-                    "fields": {
-                        "English": word,
-                        "Chinese": translationStr,
-                        "explain": explain,
-                        "webTranslate": webTransList,
-                        "phonetic": phonetic,
-                        "Audio": `[sound:youdao_${word}.mp3]`
-                    },
-                    "audio": [{
-                        "url": `https://dict.youdao.com/dictvoice?type=1&audio=${word}`,
-                        "filename": `youdao_${word}.mp3`,
-                        "skipHash": hash,
-                        "fields": [
-                            "Front", "Back"
-                        ]
-                    }],
-                }
-            ]
-        }
-    });
-}
 
 async function invokeAnki(params) {
     return invoke(params.action, params.version, params.params)
@@ -126,7 +122,7 @@ async function invoke(action, version, params = {}) {
         url: url,
         data: { action, version, params }
     })
-    return JSON.stringify(response.data.result)
+    return JSON.stringify(response.data)
 }
 
 
