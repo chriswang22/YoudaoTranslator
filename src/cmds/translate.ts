@@ -1,8 +1,4 @@
-import { Adapter } from "../adapters/adapter";
-import Workflow from "../workflow/workflow";
 import { Icmd } from "./icmd";
-import Adapters from "../adapters";
-import redaxios from '../libs/redaxios'
 import Translator from "../translator";
 
 export default class Translate implements Icmd {

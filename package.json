@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && rollup -c rollup.config.js",
-    "test": "./runtime/txiki ./dist/index.js",
-    "buildtest": "rimraf dist && rollup -c rollup.config.js && ./runtime/txiki ./dist/index.js"
+    "test": "./runtime/tjs run ./dist/index.js",
+    "buildtest": "rimraf dist && rollup -c rollup.config.js && ./runtime/tjs run ./dist/index.js"
   },
   "author": "Wenson",
   "license": "MIT",

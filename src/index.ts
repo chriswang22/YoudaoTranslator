@@ -6,8 +6,8 @@ const main = async () => {
   const word: string = args.pop() as string;
   const type: string = args.pop() as string;
   //replace your key and secret
-  const key = getenvOrDefault('key', '***')
-  const secret = getenvOrDefault('secret', '***')
+  const key = getenvOrDefault('key', '****')
+  const secret = getenvOrDefault('secret', '****')
   const platform = getenvOrDefault('platform', 'Youdao')
   const modelName = getenvOrDefault('modelName', 'note')
   const deckName = getenvOrDefault('deckName', 'note')
